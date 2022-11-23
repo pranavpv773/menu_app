@@ -14,9 +14,11 @@ class Body extends StatelessWidget {
       height: double.infinity,
       color: AppColors.primary,
       child: Center(
-        child: Image.asset(
-          AppImages.kGoogle,
-          width: 100,
+        child: GestureDetector(
+          child: Image.asset(
+            AppImages.kGoogle,
+            width: 100,
+          ),
         ),
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:menu_app/app/features/cart/view/cart.dart';
 import 'package:menu_app/app/features/home/view_model/home_notifier.dart';
+import 'package:menu_app/app/routes/routes.dart';
 import 'package:menu_app/app/styles/app_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -17,30 +19,91 @@ class HomeScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
-              itemCount: 10,
+              itemCount: context
+                  .read<HomeNotifier>()
+                  .menuModelList[0]
+                  .tableMenuList
+                  .length,
               itemBuilder: (context, index) {
+                final data = context
+                    .read<HomeNotifier>()
+                    .menuModelList[0]
+                    .tableMenuList[0]
+                    .categoryDishes[index];
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
                     child: Row(
                       children: [
                         Container(
-                          color: AppColors.primary,
                           width: 100,
                           height: 100,
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                data.dishImage.toString(),
+                              ),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text("Dish name"),
-                            Text("Dish price"),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              data.dishName.toString(),
+                            ),
+                            Text(
+                              data.dishPrice.toString(),
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.add,
+                                  ),
+                                ),
+                                Text(context
+                                    .read<HomeNotifier>()
+                                    .count
+                                    .toString()),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.minimize,
+                                  ),
+                                )
+                              ],
+                            ),
+                            ButtonWidget(
+                              fn: () {
+                                AppRoutes.nxtScreen(
+                                  const CartScreen(),
+                                );
+                              },
+                            )
                           ],
                         )
                       ],
                     ),
                   ),
                 );
-              }),
+              },
+            ),
+    );
+  }
+}
+
+class ButtonWidget extends StatelessWidget {
+  const ButtonWidget({Key? key, required this.fn}) : super(key: key);
+  final VoidCallback fn;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: fn,
+      child: const Text("Add"),
     );
   }
 }

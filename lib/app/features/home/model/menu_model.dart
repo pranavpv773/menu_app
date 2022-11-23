@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:menu_app/app/styles/app_images.dart';
+
 List<MenuModel> menuModelFromJson(String str) =>
     List<MenuModel>.from(json.decode(str).map((x) => MenuModel.fromJson(x)));
 
@@ -152,7 +154,7 @@ class CategoryDish {
         dishId: json["dish_id"],
         dishName: json["dish_name"],
         dishPrice: json["dish_price"].toDouble(),
-        dishImage: json["dish_image"],
+        dishImage: json["dish_image"] ?? AppImages.dummyImg,
         dishCalories: json["dish_calories"],
         dishDescription: json["dish_description"],
         dishAvailability: json["dish_Availability"],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:menu_app/app/features/home/view/home_screen.dart';
 import 'package:menu_app/app/features/home/view_model/home_notifier.dart';
+import 'package:menu_app/app/features/login/view/login_screen.dart';
+import 'package:menu_app/app/features/login/view_model/login_notifier.dart';
 import 'package:menu_app/app/routes/routes.dart';
 import 'package:provider/provider.dart';
 
@@ -19,11 +20,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (create) => HomeNotifier(),
         ),
+        ChangeNotifierProvider(
+          create: (create) => LoginNotifier(),
+        ),
       ],
       child: MaterialApp(
         navigatorKey: AppRoutes.navigateKey,
         debugShowCheckedModeBanner: false,
-        home: const HomeScreen(),
+        home: const LoginScreen(),
       ),
     );
   }

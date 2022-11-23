@@ -11,6 +11,7 @@ class HomeNotifier with ChangeNotifier {
   fetchMenuApi(BuildContext context) async {
     MenuResponse resp = await ApiServices().fetchMenu();
     if (resp.status == true) {
+      log("message");
       menuModelList.clear();
       menuModelList.addAll(
         resp.menuModel,

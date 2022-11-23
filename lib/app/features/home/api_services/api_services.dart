@@ -24,10 +24,16 @@ class ApiServices {
           menuModel: [],
         );
       }
+    } on DioError catch (e) {
+      return MenuResponse(
+        status: false,
+        message: e.message,
+        menuModel: [],
+      );
     } catch (e) {
       return MenuResponse(
         status: false,
-        message: "Some error",
+        message: e.toString(),
         menuModel: [],
       );
     }

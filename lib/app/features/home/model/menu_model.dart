@@ -141,7 +141,7 @@ class CategoryDish {
   String? dishName;
   double? dishPrice;
   String? dishImage;
-  int? dishCalories;
+  double? dishCalories;
   String? dishDescription;
   bool? dishAvailability;
   int? dishType;
